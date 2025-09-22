@@ -20,9 +20,13 @@ class FGOSListPage(BaseListPage):
         with allure.step('Проверека появления записи'):
             assert self.is_element_present(FGOSListPageLocators.TEST_NAME)
 
-    def new_file_exist(self):
+    def new_file_name_exist(self):
         with allure.step('Проверка того что название записи изменилось'):
             assert self.is_element_present(FGOSListPageLocators.NEW_TEST_NAME)
+
+    def new_file_base_name_exist(self):
+        with allure.step('Проверка того что название записи изменилось'):
+            assert self.is_element_present(FGOSListPageLocators.NEW_TEST_BASE_NAME)
 
     def file_dont_exist(self):
         with allure.step('Проверка отсутсвия записи'):
@@ -68,4 +72,19 @@ class FGOSListPage(BaseListPage):
             self.add_base_name(props['fgos_test_base_name'])
             self.add_base_date()
             self.add_archive_status()
+            self.confirm_add()
+
+    def edit_file_base_name(self):
+        with allure.step('Изменение названия документа-основания'):
+            self.open_edit_form()
+            self.add_base_name(props['new_fgos_test_base_name'])
+            self.confirm_add()
+
+    def add_unarchived_file(self):
+        with allure.step('Добавление записи'):
+            self.open_add_form()
+            self.add_name(props['fgos_test_name'])
+            self.add_base_name(props['fgos_test_base_name'])
+            self.add_base_date()
+            self.add_pdf()
             self.confirm_add()

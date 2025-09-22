@@ -1,5 +1,6 @@
 import pytest, allure, javaproperties
 from pages.fgos_list_page import FGOSListPage
+from pages.fgos_page import FGOSPage
 from pages.login_page import LoginPage
 
 with open('data.properties', 'r', encoding='utf-8') as data:
@@ -14,7 +15,6 @@ def setup(page):
         fgos_list_page.open()
         login_page = LoginPage(page, fgos_list_page.url)
         login_page.login()
-
 
 @allure.title("Проверка целостности таблицы")
 def test_list_correct(page):
@@ -97,4 +97,27 @@ class TestsWithTraces():
         fgos_list_page.add_full_file()
         fgos_list_page.file_exist()
         fgos_list_page.edit_file_name()
-        fgos_list_page.new_file_exist()
+        fgos_list_page.new_file_name_exist()
+
+    @allure.story("Редактирование записи")
+    @allure.title("Изменение названия документа-осноания записи")
+    def test_edit_file_base_name(self, page):
+        with allure.step('Открытие страницы'):
+            fgos_list_page = FGOSListPage(page, link)
+            fgos_list_page.open()
+        fgos_list_page.add_full_file()
+        fgos_list_page.file_exist()
+        fgos_list_page.edit_file_base_name()
+        fgos_list_page.new_file_base_name_exist()
+
+    @allure.story("Создание неархивной записи")
+    @allure.title("Создание корректной записи")
+    def test_add_unarchived_file(self, page):
+        with allure.step('Открытие страницы'):
+            fgos_list_page = FGOSListPage(page, link)
+            fgos_list_page.open()
+        fgos_list_page.add_unarchived_file()
+        fgos_list_page.file_exist()
+        fgos_page = FGOSPage(page, props['fgos_link'])
+        fgos_page.open()
+        fgos_page.new_file_exists()

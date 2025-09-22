@@ -44,6 +44,7 @@ class BaseListPageLocators:
 class FGOSListPageLocators:
     TEST_NAME = f"div.ant-typography:text-is('{props['fgos_test_name']}')"
     NEW_TEST_NAME = f"div.ant-typography:text-is('{props['new_fgos_test_name']}')"
+    NEW_TEST_BASE_NAME = f"div.ant-typography:text-is('{props['new_fgos_test_base_name']}')"
     ADD_CANCEL_BUTTON = "button > span:text-is('Отмена')"
 
 class FOOPListPageLocators:
