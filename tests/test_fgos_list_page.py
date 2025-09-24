@@ -2,6 +2,7 @@ import pytest, allure, javaproperties
 from pages.fgos_list_page import FGOSListPage
 from pages.fgos_page import FGOSPage
 from pages.login_page import LoginPage
+from pages.fgos_site_page import FGOSSitePage
 
 with open('data.properties', 'r', encoding='utf-8') as data:
     props = javaproperties.load(data)
@@ -16,6 +17,7 @@ def setup(page):
         login_page = LoginPage(page, fgos_list_page.url)
         login_page.login()
 
+@allure.story("Общие тесты")
 @allure.title("Проверка целостности таблицы")
 def test_list_correct(page):
     with allure.step('Открытие страницы'):
@@ -121,3 +123,16 @@ class TestsWithTraces():
         fgos_page = FGOSPage(page, props['fgos_link'])
         fgos_page.open()
         fgos_page.new_file_exists()
+
+    @allure.story("Общие тесты")
+    @allure.title("Открытие записи в админке")
+    def test_open_file(self, page):
+        with allure.step('Открытие страницы'):
+            fgos_list_page = FGOSListPage(page, link)
+            fgos_list_page.open()
+        fgos_list_page.add_full_file()
+        fgos_list_page.file_exist()
+        fgos_list_page.open_add_file()
+        fgos_site_page = FGOSSitePage(page, fgos_list_page.url)
+        fgos_site_page.page_base_exist()
+        fgos_site_page.fgos_page_correct()

@@ -88,3 +88,7 @@ class FGOSListPage(BaseListPage):
             self.add_base_date()
             self.add_pdf()
             self.confirm_add()
+
+    def open_add_file(self):
+        with allure.step('Открытие тестовой записи'):
+            self.open_file(FGOSListPageLocators.TEST_NAME)

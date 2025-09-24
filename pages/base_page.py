@@ -19,8 +19,12 @@ class BasePage:
         expect(element).not_to_be_attached()
 
     def open_file(self, what):
-        file_name = self.page.locator(what)
+        file_name = self.page.wait_for_selector(what)
         file_name.click()
+
+    def has_text(self, what, text):
+        element = self.page.wait_for_selector(what)
+        return element.inner_text() == text
 
 #    def page_switch_to_one(self):
 #        with allure.step('Переключение на первую страницу'):

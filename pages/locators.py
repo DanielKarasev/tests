@@ -73,12 +73,15 @@ class BaseSitePageLocators:
     BASE_DATE_LINE = "div:text-is('Дата документа-основания')"
     LINK_LINE = "div:text-is('Файл')"
     ARCHIVE_LINE = "div:text-is('В архиве')"
+    AUTOR_LINE = "div:text-is('Автор')"
     DATE_LINE = "div:text-is('Дата создания записи')"
     TEST_NAME = "div:text-is('Название') + div"
     TEST_BASE_NAME = "div:text-is('Название документа-основания') + div"
+    AUTOR = "div:text-is('Автор') + div"
     ARCHIVE_CONDITION = "div:text-is('В архиве') + div"
-    DATE = "div:text-is('Дата документа-основания') + div"
+    BASE_DATE = "div:text-is('Дата документа-основания') + div"
     FILE_NAME = "div:text-is('Файл') + div"
+    DATE = "div:text-is('Дата создания записи') + div"
 
 class FGOSSitePageLocators:
     ADD_FILE_BUTTON = "button > span:text-is('Создать')"
