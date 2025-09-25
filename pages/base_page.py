@@ -26,6 +26,10 @@ class BasePage:
         element = self.page.wait_for_selector(what)
         return element.inner_text() == text
 
+    def fill_field(self, what, text):
+        element = self.page.wait_for_selector(what)
+        element.fill(text)
+
 #    def page_switch_to_one(self):
 #        with allure.step('Переключение на первую страницу'):
 #            page_switch = self.page.locator(BasePageLocators.PAGE_ONE)

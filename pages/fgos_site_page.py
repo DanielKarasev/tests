@@ -20,3 +20,60 @@ class FGOSSitePage(BaseSitePage):
     def base_name_correct(self):
         with allure.step('Проверка корректности названия документа-основания'):
             assert self.has_text(BaseSitePageLocators.TEST_BASE_NAME, props['foop_test_base_name'])
+
+    def table_correct(self):
+        with allure.step('Проверка целостности таблицы'):
+            self.id_column_exist()
+            self.name_column_exist()
+            self.date_column_exist()
+            self.base_date_column_exist()
+            self.link_column_exist()
+
+    def id_column_exist(self):
+        with allure.step('Проверка наличия столбца с id записи'):
+            assert self.is_element_present(FGOSSitePageLocators.ID_COLUMN)
+
+    def name_column_exist(self):
+        with allure.step('Проверка наличия столбца с названием файла'):
+            assert self.is_element_present(FGOSSitePageLocators.NAME_COLUMN)
+
+    def date_column_exist(self):
+        with allure.step('Проверка наличия столбца с датой создания записи'):
+            assert self.is_element_present(FGOSSitePageLocators.DATE_COLUMN)
+
+    def base_date_column_exist(self):
+        with allure.step('Проверка наличия столбца с датой документа-основания'):
+            assert self.is_element_present(FGOSSitePageLocators.BASE_DATE_COLUMN)
+
+    def link_column_exist(self):
+        with allure.step('Проверка наличия столбца с ссылкой на pdf файл'):
+            assert self.is_element_present(FGOSSitePageLocators.LINK_COLUMN)
+
+    def add_file(self):
+        with allure.step('Добавление записи к стандарту'):
+            with allure.step('Открытие формы добавления записи'):
+                self.open_file(FGOSSitePageLocators.ADD_FILE_BUTTON)
+            with allure.step('Ввод названия файла'):
+                self.fill_field(FGOSSitePageLocators.ADD_NAME_FIELD, props['fgos_file_name'])
+            self.fill_base_date()
+            self.add_pdf()
+            self.confirm_add()
+
+    def fill_base_date(self):
+        with allure.step('Ввод даты документа-основания'):
+            add_base_date_field = self.page.locator(FGOSSitePageLocators.ADD_BASE_DATE_FIELD)
+            add_base_date_field.type(f'{(datetime.datetime.today() - datetime.timedelta(1)).strftime("%d.%m.%Y")}\n')
+
+    def add_pdf(self):
+        with allure.step('Добавление pdf файла'):
+            add_pdf_button = self.page.locator(FGOSSitePageLocators.ADD_PDF_BUTTON)
+            add_pdf_button.set_input_files("Тест-основание.pdf")
+
+    def confirm_add(self):
+        with allure.step('Подтверждение добавления файла'):
+            add_confirm_button = self.page.locator(FGOSSitePageLocators.ADD_CONFIRM_BUTTON)
+            add_confirm_button.click()
+
+    def new_fie_exist(self):
+        with allure.step('Проверка появления нового файла'):
+            assert self.is_element_present(FGOSSitePageLocators.NEW_FILE_NAME)

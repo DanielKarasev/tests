@@ -48,13 +48,11 @@ class BaseListPage(BasePage):
 
     def add_name(self, name):
         with allure.step('Добавление названия записи'):
-            add_name_field = self.page.locator(BaseListPageLocators.ADD_NAME_FIELD)
-            add_name_field.fill(name)
+            self.fill_field(BaseListPageLocators.ADD_NAME_FIELD, name)
 
     def add_base_name(self, base_name):
         with allure.step('Добавление название документа-основания записи'):
-            add_base_name_field = self.page.locator(BaseListPageLocators.ADD_BASE_NAME_FIELD)
-            add_base_name_field.fill(base_name)
+            self.fill_field(BaseListPageLocators.ADD_BASE_NAME_FIELD, base_name)
 
     def add_base_date(self):
         with allure.step('Добавление даты документа-основания записи'):
