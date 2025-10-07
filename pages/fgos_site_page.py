@@ -74,6 +74,81 @@ class FGOSSitePage(BaseSitePage):
             add_confirm_button = self.page.locator(FGOSSitePageLocators.ADD_CONFIRM_BUTTON)
             add_confirm_button.click()
 
-    def new_fie_exist(self):
+    def new_file_exist(self):
         with allure.step('Проверка появления нового файла'):
             assert self.is_element_present(FGOSSitePageLocators.NEW_FILE_NAME)
+
+    def new_file_didnt_exist(self):
+        with allure.step(f'Проверка того что запись с названием {props['fgos_file_name']} не отображается'):
+            self.is_not_element_present(FGOSSitePageLocators.NEW_FILE_NAME)
+
+    def add_file_without_name(self):
+        with allure.step('Попытка добавление записи к стандарту'):
+            with allure.step('Открытие формы добавления записи'):
+                self.open_file(FGOSSitePageLocators.ADD_FILE_BUTTON)
+            self.fill_base_date()
+            self.add_pdf()
+            self.confirm_add()
+
+    def add_file_without_base_date(self):
+        with allure.step('Попытка добавление записи к стандарту'):
+            with allure.step('Открытие формы добавления записи'):
+                self.open_file(FGOSSitePageLocators.ADD_FILE_BUTTON)
+            with allure.step('Ввод названия файла'):
+                self.fill_field(FGOSSitePageLocators.ADD_NAME_FIELD, props['fgos_file_name'])
+            self.add_pdf()
+            self.confirm_add()
+
+    def add_file_without_pdf(self):
+        with allure.step('Попытка добавление записи к стандарту'):
+            with allure.step('Открытие формы добавления записи'):
+                self.open_file(FGOSSitePageLocators.ADD_FILE_BUTTON)
+            with allure.step('Ввод названия файла'):
+                self.fill_field(FGOSSitePageLocators.ADD_NAME_FIELD, props['fgos_file_name'])
+            self.fill_base_date()
+            self.confirm_add()
+
+    def name_allert_correct(self):
+        with allure.step('Проверка появления сообщения об ошибке'):
+            assert self.is_element_present(FGOSSitePageLocators.ADD_NAME_ALERT)
+
+    def base_date_allert_correct(self):
+        with allure.step('Проверка появления сообщения об ошибке'):
+            assert self.is_element_present(FGOSSitePageLocators.ADD_BASE_DATE_ALERT)
+
+    def pdf_allert_correct(self):
+        with allure.step('Проверка появления сообщения об ошибке'):
+            assert self.is_element_present(FGOSSitePageLocators.ADD_PDF_ALERT)
+
+    def delete_file(self):
+        with allure.step("удаление файла"):
+            self.open_file(FGOSSitePageLocators.DELETE_BUTTON)
+            self.open_file(FGOSSitePageLocators.DELETE_CONFIRM_BUTTON)
+
+    def edit_file(self):
+        with allure.step('Открытие формы редактирвания'):
+            self.open_file(FGOSSitePageLocators.EDIT_BUTTON)
+        with allure.step('Изменение имени файла'):
+            self.fill_field(FGOSSitePageLocators.ADD_NAME_FIELD, props['new_fgos_file_name'])
+        with allure.step('Подтверждение изменений'):
+            self.open_file(FGOSSitePageLocators.ADD_CONFIRM_BUTTON)
+
+    def new_file_name_exist(self):
+        with allure.step(f'Проверка того что запись с названием {props['new_fgos_file_name']} отображается'):
+            assert self.is_element_present(FGOSSitePageLocators.EDIT_FILE_NAME)
+
+    def new_file_name_didnt_exist(self):
+        with allure.step(f'Проверка того что запись с названием {props['new_fgos_file_name']} не отображается'):
+            self.is_not_element_present(FGOSSitePageLocators.EDIT_FILE_NAME)
+
+    def find_file(self, what):
+        with allure.step('Открытие фильра по именам'):
+            self.open_file(FGOSSitePageLocators.NAME_FILTER_BUTTON)
+        with allure.step('Ввод имени искомой записи'):
+            self.fill_field(FGOSSitePageLocators.NAME_FILTER_FIELD, what)
+        with allure.step('Фильтрация списка записей'):
+            self.open_file(FGOSSitePageLocators.NAME_FILTER_CONFIRM_BUTTON)
+
+    def add_file_open(self):
+        with allure.step('Открытие созданной записи'):
+            self.open_file(FGOSSitePageLocators.NEW_FILE_NAME)
