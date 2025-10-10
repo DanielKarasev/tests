@@ -2,7 +2,7 @@ import pytest, allure, javaproperties
 from pages.sanpin_list_page import SanPINListPage
 from pages.sanpin_page import SanPINPage
 from pages.login_page import LoginPage
-#from pages.sanpin_site_page import SanPINSitePage
+from pages.sanpin_site_page import SanPINSitePage
 
 with open('data.properties', 'r', encoding='utf-8') as data:
     props = javaproperties.load(data)
@@ -37,7 +37,7 @@ def test_delete_file(page):
     sanpin_list_page.delete_file()
     sanpin_list_page.file_dont_exist()
 
-@allure.story("Создание архивной нормы")
+@allure.story("Создание архивной записи")
 @allure.title("Попытка создать норму без имени")
 def test_add_wrong_name_file(page):
     with allure.step('Открытие страницы'):
@@ -46,7 +46,7 @@ def test_add_wrong_name_file(page):
     sanpin_list_page.add_file_without_name()
     sanpin_list_page.file_dont_exist()
 
-@allure.story("Создание архивной нормы")
+@allure.story("Создание архивной записи")
 @allure.title("Попытка создать норму без pdf файла")
 def test_add_wrong_pdf_file(page):
     with allure.step('Открытие страницы'):
@@ -204,3 +204,15 @@ class TestsWithTraces():
         sanpin_page = SanPINPage(page, site_link)
         sanpin_page.open()
         sanpin_page.new_file_exists()
+
+    @allure.story("Общие тесты")
+    @allure.title("Открытие записи")
+    def test_open_file(self, page):
+        with allure.step('Открытие страницы'):
+            sanpin_list_page = SanPINListPage(page, link)
+            sanpin_list_page.open()
+        sanpin_list_page.add_full_file()
+        sanpin_list_page.file_exist()
+        sanpin_list_page.open_add_file()
+        sanpin_site_page = SanPINSitePage(page, sanpin_list_page.url)
+        sanpin_site_page.sanpin_page_correct()
