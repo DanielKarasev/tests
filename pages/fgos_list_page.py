@@ -1,4 +1,4 @@
-import allure, datetime, javaproperties
+import allure, javaproperties
 from .base_list_page import BaseListPage
 from .locators import FGOSListPageLocators
 
@@ -33,7 +33,7 @@ class FGOSListPage(BaseListPage):
             self.is_not_element_present(FGOSListPageLocators.TEST_NAME)
 
     def edit_file_name(self):
-        with allure.step('<UNK> <UNK> <UNK>'):
+        with allure.step('Изменение имени записи'):
             self.open_edit_form()
             self.add_name(props['new_fgos_test_name'])
             self.confirm_add()

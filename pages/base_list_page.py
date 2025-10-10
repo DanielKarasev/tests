@@ -84,6 +84,22 @@ class BaseListPage(BasePage):
             delete_button = self.page.locator(BaseListPageLocators.CLEAR_DATE_BUTTON)
             delete_button.click()
 
+    def delete_file_base_name(self):
+        with allure.step('Удаление названия документа-основания'):
+            self.open_edit_form()
+            self.add_base_name('')
+            self.confirm_add()
+
+    def delete_file_base_date(self):
+        with allure.step('Удаление даты документа-основания'):
+            self.open_edit_form()
+            self.delete_base_date()
+            self.confirm_add()
+
+    def base_date_didnt_exidt(self):
+        with allure.step('Проверка отсутствия даты документа-основания'):
+            self.is_not_element_present(BaseListPageLocators.BASE_DATE)
+
     def delete_file(self):
         with allure.step('Удаление записи'):
             delete_file_button = self.page.locator(BaseListPageLocators.DELETE_BUTTON)
@@ -102,3 +118,58 @@ class BaseListPage(BasePage):
     def pdf_alert_correct(self):
         with allure.step('Проверка появления предупреждения о необходимости PDF файла'):
             assert self.is_element_present(BaseListPageLocators.ADD_PDF_ALERT)
+
+    def page_switch_to_next(self):
+        with allure.step('Переключение на следующую страницу'):
+            page_switch = self.page.locator(BaseListPageLocators.PAGE_FORWARD_BUTTON)
+            page_switch.click()
+
+    def page_switch_to_back(self):
+        with allure.step('Переключение на предыдущую страницу'):
+            page_switch = self.page.locator(BaseListPageLocators.PAGE_BACK_BUTTON)
+            page_switch.click()
+
+    def page_switch_to_one(self):
+        with allure.step('Переключение на первую страницу'):
+            page_switch = self.page.locator(BaseListPageLocators.PAGE_ONE)
+            page_switch.click()
+
+    def page_switch_to_two(self):
+        with allure.step('Переключение на вторую страницу'):
+            page_switch = self.page.locator(BaseListPageLocators.PAGE_TWO)
+            page_switch.click()
+
+    def checking_record_numbers(self):
+        with allure.step('Проверка того какие записи на странице'):
+            numbers = self.page.locator(BaseListPageLocators.RECORD_NUMBERS)
+            return numbers.inner_text()
+
+    def pagination_check_1(self):
+        num_page_one = self.checking_record_numbers()
+        self.page_switch_to_two()
+        num_page_two = self.checking_record_numbers()
+        with allure.step('Сверка того что записи на 1 и 2 страницах разные'):
+            assert num_page_one != num_page_two
+
+    def pagination_check_2(self):
+        num_page_one = self.checking_record_numbers()
+        self.page_switch_to_next()
+        num_page_two = self.checking_record_numbers()
+        with allure.step('Сверка того что записи на 1 и 2 страницах разные'):
+            assert num_page_one != num_page_two
+
+    def pagination_check_3(self):
+        self.page_switch_to_next()
+        num_page_one = self.checking_record_numbers()
+        self.page_switch_to_one()
+        num_page_two = self.checking_record_numbers()
+        with allure.step('Сверка того что записи на 1 и 2 страницах разные'):
+            assert num_page_one != num_page_two
+
+    def pagination_check_4(self):
+        self.page_switch_to_two()
+        num_page_one = self.checking_record_numbers()
+        self.page_switch_to_back()
+        num_page_two = self.checking_record_numbers()
+        with allure.step('Сверка того что записи на 1 и 2 страницах разные'):
+            assert num_page_one != num_page_two

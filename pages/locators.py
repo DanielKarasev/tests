@@ -10,8 +10,6 @@ class LoginPageLocators:
 
 class BasePageLocators:
     CHECK_TEXT = ":text-is('Система управления сервисом')"
-    PAGE_ONE = "li > a:text-is('1')"
-    PAGE_TWO = "li > a:text-is('2')"
 
 class BaseListPageLocators:
     ADD_BUTTON = "button > span:text-is('Добавить')"
@@ -38,6 +36,8 @@ class BaseListPageLocators:
     BASE_DATE = f"div.ant-typography:text-is('{date}')"
     CLEAR_DATE_BUTTON = "span.ant-picker-clear"
     RECORD_NUMBERS = "li.ant-pagination-total-text"
+    PAGE_ONE = "li > a:text-is('1')"
+    PAGE_TWO = "li > a:text-is('2')"
     PAGE_BACK_BUTTON = "span:text-is('Назад')"
     PAGE_FORWARD_BUTTON = "span:text-is('Дальше')"
 
