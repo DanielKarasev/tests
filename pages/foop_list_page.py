@@ -7,6 +7,14 @@ with open('../tests/data.properties', 'r', encoding='utf-8') as data:
     props = javaproperties.load(data)
 
 class FOOPListPage(BaseListPage):
+    def foop_list_correct(self):
+        self.base_list_correct()
+        self.adapted_column_exist()
+
+    def adapted_column_exist(self):
+        with allure.step('Проверка наличия колонки Адаптации'):
+            assert self.is_element_present(FOOPListPageLocators.ADAPTED_COLUMN)
+
     def add_full_unadapted_file(self):
         with allure.step('Добавление записи'):
             self.open_add_form()
@@ -39,6 +47,10 @@ class FOOPListPage(BaseListPage):
     def new_file_name_exist(self):
         with allure.step('Проверка того что название записи изменилось'):
             assert self.is_element_present(FOOPListPageLocators.NEW_TEST_NAME)
+
+    def new_file_base_name_exist(self):
+        with allure.step('Проверка того что название документа-оснвоания изменилось'):
+            assert self.is_element_present(FOOPListPageLocators.NEW_TEST_BASE_NAME)
 
     def file_dont_exist(self):
         with allure.step('Проверка отсутсвия записи'):

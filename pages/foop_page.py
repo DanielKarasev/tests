@@ -5,7 +5,7 @@ from .locators import FOOPPageLocators
 with open('../tests/data.properties', 'r', encoding='utf-8') as data:
     props = javaproperties.load(data)
 
-class SanPINPage(BasePage):
+class FOOPPage(BasePage):
 
     def open_adapted_foops(self):
         with allure.step('Переключение страницы на адаптированные записи'):

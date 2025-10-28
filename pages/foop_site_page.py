@@ -6,7 +6,7 @@ from .locators import FOOPSitePageLocators
 with open('../tests/data.properties', 'r', encoding='utf-8') as data:
     props = javaproperties.load(data)
 
-class SanPINSitePage(BaseSitePage):
+class FOOPSitePage(BaseSitePage):
     def foop_page_exist(self):
         self.page_base_correct()
 
