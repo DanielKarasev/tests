@@ -8,7 +8,8 @@ with open('../tests/data.properties', 'r', encoding='utf-8') as data:
 
 class FOOPSitePage(BaseSitePage):
     def foop_page_exist(self):
-        self.page_base_correct()
+        self.page_base_exist()
+        self.adapted_status_exist()
 
     def adapted_status_exist(self):
         with allure.step('Проверка наличия строки с указателем адаптированности'):
