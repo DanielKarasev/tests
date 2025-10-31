@@ -136,3 +136,6 @@ class FOOPSitePageLocators:
 class SanPINPageLocators:
     TEST_NAME = f"a:text-is('{props['sanpin_test_name']}')"
     COUNT_100_BUTTON = "span:text-is('100')"
+
+class CoursesListPageLocators:
+    EDUCATION_LEVEL_COLUMN = "span.ant-table-column-title:text-is('Уровень образования')"
