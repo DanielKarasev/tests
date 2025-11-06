@@ -108,7 +108,7 @@ class BaseListPage(BasePage):
             delete_confirm_buttton.click()
 
     def name_alert_correct(self):
-        with allure.step('Проверка появления предупреждения о необходимости имени'):
+        with allure.step('Проверка появления предупреждения о необходимости заполнения поля'):
             assert self.is_element_present(BaseListPageLocators.ADD_NAME_ALERT)
 
     def date_alert_correct(self):

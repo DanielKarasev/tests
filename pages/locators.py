@@ -138,4 +138,7 @@ class SanPINPageLocators:
     COUNT_100_BUTTON = "span:text-is('100')"
 
 class CoursesListPageLocators:
-    EDUCATION_LEVEL_COLUMN = "span.ant-table-column-title:text-is('Уровень образования')"
+    ADD_EDUCATION_LEVEL_COLUMN = "input[placeholder='Введите название']"
+    ADD_ED_LEVEL_FIELD = "input#educationLevel"
+    NEW_COURSE = f"div:text-is('{props['courses_test_name']}')"
+    CHANGED_COURSE = f"div:text-is('{props['courses_new_test_name']}')"
