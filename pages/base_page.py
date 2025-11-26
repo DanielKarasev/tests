@@ -29,4 +29,3 @@ class BasePage:
     def fill_field(self, what, text):
         element = self.page.wait_for_selector(what)
         element.fill(text)
-

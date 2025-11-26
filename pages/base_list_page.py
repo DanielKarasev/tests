@@ -79,6 +79,11 @@ class BaseListPage(BasePage):
             edit_button = self.page.locator(BaseListPageLocators.EDIT_BUTTON)
             edit_button.click()
 
+    def edit_add_base_date(self):
+        self.open_edit_form()
+        self.add_base_date()
+        self.confirm_add()
+
     def delete_base_date(self):
         with allure.step('Удаление даты документа-основания'):
             delete_button = self.page.locator(BaseListPageLocators.CLEAR_DATE_BUTTON)

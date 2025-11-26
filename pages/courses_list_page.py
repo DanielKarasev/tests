@@ -94,3 +94,24 @@ class CoursesListPage(BaseListPage):
     def changed_course_exist(self):
         with allure.step('Проверка появления изменённого имени предмета'):
             self.is_element_present(CoursesListPageLocators.CHANGED_COURSE)
+
+    def add_changed_noo_course(self):
+        with allure.step('Добавление предмета'):
+            self.open_add_form()
+            self.add_name(props['courses_new_test_name'])
+            self.add_ed_level_noo()
+            self.confirm_add()
+
+    def add_changed_ooo_course(self):
+        with allure.step('Добавление предмета'):
+            self.open_add_form()
+            self.add_name(props['courses_new_test_name'])
+            self.add_ed_level_ooo()
+            self.confirm_add()
+
+    def add_changed_soo_course(self):
+        with allure.step('Добавление предмета'):
+            self.open_add_form()
+            self.add_name(props['courses_new_test_name'])
+            self.add_ed_level_soo()
+            self.confirm_add()

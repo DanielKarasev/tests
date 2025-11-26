@@ -1,4 +1,4 @@
-import allure, datetime, javaproperties
+import allure, javaproperties
 from .base_site_page import BaseSitePage
 from .locators import BaseSitePageLocators
 from .locators import FOOPSitePageLocators
